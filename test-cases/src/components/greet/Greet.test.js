@@ -54,7 +54,7 @@ describe('Greet Component', ()=> {
         fireEvent.click(btn)
         expect(text).not.toBeInTheDocument()
     })
-    test.only('Count Checking after click', ()=> {
+    test('Count Checking after click', ()=> {
         render(<Greet />)
         const countEl = screen.getByRole('heading', {name: 'Count 0'})
         expect(countEl).toHaveTextContent('Count 0')
