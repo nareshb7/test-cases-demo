@@ -32,7 +32,7 @@ describe('Greet Component', ()=> {
         screen.debug(listItems)
         expect(listItems).toHaveLength(3)
     })
-    test.only('Timeout header is render or not',async ()=> {
+    test('Timeout header is render or not',async ()=> {
         render(<Greet />)
         // const timeEl = screen.getByRole('heading', {name: 'Timeout Check'})
         // If the El not found getBy method throws an error so for disapperance elements we use  queryBy method it returns null if el not found
@@ -46,13 +46,23 @@ describe('Greet Component', ()=> {
         const imgEl = screen.getByAltText('image')
         expect(imgEl).toBeInTheDocument()
     })
-    test('After Click dismiss will be remove', ()=> {
+    test('After Click dismiss El has to be removed', ()=> {
         render(<Greet />)
         const text = screen.getByText('Dismiss')
         expect(text).toBeInTheDocument()
-        const btn = screen.getByRole('button', {name:'Clicked'})
+        const btn = screen.getByRole('button', {name:/Clicked/i})
         fireEvent.click(btn)
         expect(text).not.toBeInTheDocument()
+    })
+    test.only('Count Checking after click', ()=> {
+        render(<Greet />)
+        const countEl = screen.getByRole('heading', {name: 'Count 0'})
+        expect(countEl).toHaveTextContent('Count 0')
+        const countBtnEl = screen.getByRole('button', {name: 'SetCount'})
+        fireEvent.click(countBtnEl)
+        const countEl1 = screen.getByRole('heading', {name: 'Count 10'})
+        expect(countEl1).toHaveTextContent('Count 10')
+        expect(countEl).not.toHaveTextContent('Count 0')
     })
 })
 

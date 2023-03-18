@@ -6,6 +6,7 @@ describe('App Component', ()=> {
   test('renders learn react link', () => {
     render(<App />);
     const linkElement = screen.getByText(/hello/i);
+    screen.debug(linkElement)
     expect(linkElement).toBeInTheDocument();
   });
   
